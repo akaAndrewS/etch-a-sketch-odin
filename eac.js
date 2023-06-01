@@ -16,8 +16,9 @@ for (let i = 1; i <= 16; i++) {
     for (let j = 1; j <= 16; j++) {
         //create a div element to act as new square
         let innerDiv = document.createElement('div');
-        //'innerDiv' is given an id that matches the row and j
+        //'innerDiv' is given an id that matches the row and j   //FIXME comment
         innerDiv.setAttribute('id', `div-space-${i}-${j}`);
+        innerDiv.setAttribute('class', 'square');
         //width and height
         innerDiv.style.width = "50px";
         innerDiv.style.height = "50px";
@@ -25,9 +26,16 @@ for (let i = 1; i <= 16; i++) {
         innerDiv.style.aspectRatio = "1/1";
         //adds border style to see each square
         innerDiv.style.border = "1px solid black";
+        //adds EventListener to each sqaure that calls changeColor()
+        innerDiv.addEventListener('mouseover', changeColor);
         //'innerDiv' added to the current row
         div.appendChild(innerDiv);
     }
 }
 
+// changeColor() function takes adds the 'sected' class to a node for a set amount of time
+function changeColor(e) {
+    e.target.classList.add('selected');
+    setTimeout( () => {e.target.classList.remove('selected')}, 500);
+}
 //mouseover mouseleave
