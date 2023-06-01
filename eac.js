@@ -9,7 +9,7 @@ resetButton.addEventListener('click', reset);
 //creates intitial grid of 16x16 sqaures
 makeGrid(16);
 
-// makeGrid() function that creates a grid based on sqaures
+// makeGrid() function creates a grid based on number passed to it
 function makeGrid(squares) {
     //space is set based on sqaures to ensure uniform squares
     let space = (780/ squares);
@@ -53,8 +53,8 @@ function makeGrid(squares) {
     }
 }
 
-// changeColor() function takes adds the 'sected' class to a node and changes the backgound-color to a random color
-//  or darken the node if it already has a color
+// changeColor() function adds the 'selected' class to a node and changes the backgound-color to a random color
+//  or darkens the node if it already has a color
 function changeColor(e) {
     //IF sqaure has not been selected before
     if(e.target.className != 'square selected') {
@@ -84,7 +84,7 @@ function changeColor(e) {
     }
 }
 
-// darken() function that takes a value and returns that value minus 25 or 0
+// darken() function takes a value and returns that value minus 25 or 0
 function darken (value) {
     if(value >= 25) {
         value -= 25;
