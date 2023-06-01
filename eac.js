@@ -53,9 +53,44 @@ function makeGrid(squares) {
     }
 }
 
-// changeColor() function takes adds the 'sected' class to a node for a set amount of time
+// changeColor() function takes adds the 'sected' class to a node and changes the backgound-color to a random color
+//  or darken the node if it already has a color
 function changeColor(e) {
-    e.target.classList.add('selected');
+    //IF sqaure has not been selected before
+    if(e.target.className != 'square selected') {
+        //add 'selected' class node
+        e.target.classList.add('selected');
+        //get random values for rgb
+        let randomR = Math.floor(Math.random() * 256);
+        let randomG = Math.floor(Math.random() * 256);
+        let randomB = Math.floor(Math.random() * 256);
+        //set background-color using the new rgb values
+        e.target.style.backgroundColor = `rgb(${randomR}, ${randomG}, ${randomB})`;
+    }
+    //ELSE the square already has a random background-color
+    else {
+        //get the current rgb values
+        let rgb = window.getComputedStyle(e.target).getPropertyValue('background-color');
+        rgb = rgb.replace(/[^\d,]/g, '').split(',');
+        let currentR = rgb[0];
+        let currentG = rgb[1];
+        let currentB = rgb[2];
+        //call darken() funciton for each rgb value to subtract 25 or set to 0
+        currentR = darken(currentR);
+        currentG = darken(currentG);
+        currentB = darken(currentB);
+        //set background-color using the new darker rgb values
+        e.target.style.backgroundColor = `rgb(${currentR}, ${currentG}, ${currentB})`;
+    }
+}
+
+// darken() function that takes a value and returns that value minus 25 or 0
+function darken (value) {
+    if(value >= 25) {
+        value -= 25;
+        return value;
+    }
+    return 0;
 }
 
 // reset() function prompts the user for new size for new grid
